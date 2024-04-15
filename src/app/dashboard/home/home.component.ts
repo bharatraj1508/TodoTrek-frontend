@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
-import { User } from '../../core/interface/user';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../../core/auth.service";
+import { User } from "../../core/interface/user";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrl: "./home.component.css",
 })
 export class HomeComponent implements OnInit {
   current: User = {
     user: {
-      _id: '',
-      email: '',
-      isVerified: '',
+      _id: "",
+      email: "",
+      isVerified: "",
     },
   };
 
