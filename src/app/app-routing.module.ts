@@ -8,6 +8,7 @@ import { ResetPasswordComponent } from "./layout/account/reset-password/reset-pa
 import { ForgotPasswordFormComponent } from "./layout/account/forgot-password-form/forgot-password-form.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "verify/email/action", component: EmailVerifyComponent },

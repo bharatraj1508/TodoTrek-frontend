@@ -24,9 +24,21 @@ export class ForgotPasswordFormComponent {
     this.emailForm = this.formBuilder.group({
       email: new FormControl("", [Validators.required, Validators.email]),
     });
+
+    this.emailForm.valueChanges.subscribe(() => {
+      if (this.failure) {
+        this.failure = false;
+        this.message = "";
+      }
+    });
   }
 
   sendEmail() {
+    if (!this.emailForm.valid) {
+      this.message = "Please enter a valid email address.";
+      this.failure = true;
+      return;
+    }
     this.authService.sendPasswordResetEmail(this.emailForm.value).subscribe(
       (res) => {
         this.message = res.message;

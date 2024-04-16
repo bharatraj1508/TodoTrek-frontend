@@ -27,30 +27,42 @@ export class LoginComponent {
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required]),
     });
+
+    this.loginForm.valueChanges.subscribe(() => {
+      if (this.hasError) {
+        this.hasError = false;
+        this.errorMessage = "";
+      }
+    });
   }
 
   login() {
-    this.authService.login(this.loginForm.value).subscribe(
-      (res) => {
-        localStorage.setItem("user-token", res.token);
-        this.router.navigate(["dashboard"]);
-      },
-      (error) => {
-        const unauthrisedStatusCode = [401, 404];
-        if (unauthrisedStatusCode.includes(error.status)) {
-          if (error.error.message == "User email is not verified")
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(
+        (res) => {
+          localStorage.setItem("user-token", res.token);
+          this.router.navigate(["dashboard"]);
+        },
+        (error) => {
+          const unauthrisedStatusCode = [401, 404];
+          if (unauthrisedStatusCode.includes(error.status)) {
+            if (error.error.message == "User email is not verified")
+              this.errorMessage = error.error.message;
+            else {
+              this.errorMessage =
+                "Email or Password is incorrect. Please try again.";
+            }
+          } else if (!error.error.message) {
+            this.errorMessage = "TodoTrek Server is not responding";
+          } else {
             this.errorMessage = error.error.message;
-          else {
-            this.errorMessage =
-              "Email or Password is incorrect. Please try again.";
           }
-        } else if (!error.error.message) {
-          this.errorMessage = "TodoTrek Server is not responding";
-        } else {
-          this.errorMessage = error.error.message;
+          this.hasError = true;
         }
-        this.hasError = true;
-      }
-    );
+      );
+    } else {
+      this.hasError = true;
+      this.errorMessage = "Email or Password must be provided";
+    }
   }
 }
