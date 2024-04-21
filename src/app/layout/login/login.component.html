@@ -1,7 +1,7 @@
-<div class="flex justify-center md:mx-20 md;space-x-0">
+<div class="flex justify-center md:mx-20 md:space-x-0">
   <!-- Introduction div, hidden on screens smaller than 'lg' -->
   <div
-    class="w-1/2 p-8 bg-indigo-600 text-white rounded-lg lg:shadow-2xl sm:p-10 md:p-12 min-h-[500px] hidden lg:block"
+    class="w-1/2 max-w-xl p-8 bg-indigo-600 text-white rounded-lg lg:shadow-2xl sm:p-10 md:p-12 min-h-[500px] hidden lg:block"
   >
     <div class="flex flex-col justify-center h-full">
       <h2 class="text-3xl font-bold mb-4">Welcome to TodoTrek!</h2>
@@ -32,7 +32,7 @@
   </div>
   <!-- Login form div, adjusted for full width on small screens -->
   <div
-    class="w-full lg:w-1/2 p-4 md:bg-gray-100 border border-gray-200 md:rounded-lg md:shadow-2xl sm:p-6 md:p-8"
+    class="w-screen max-w-xl lg:w-1/2 p-4 md:bg-gray-100 border border-gray-200 md:rounded-lg md:shadow-2xl sm:p-6 md:p-8"
   >
     <div
       class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
@@ -112,6 +112,30 @@
       >
         Sign in
       </button>
+      <p class="text-center text-gray-500 text-sm">- or login with -</p>
+      <div class="flex flex-row space-x-8 justify-center items-center">
+        <!-- Google -->
+
+        <div
+          id="g_id_onload"
+          data-client_id="84940361308-e9hf3q7bc2d0bngegcg6hr1ots0c56tl.apps.googleusercontent.com"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-callback="handleCredentialResponse"
+          data-itp_support="true"
+        ></div>
+
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="pill"
+          data-theme="filled_blue"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left"
+        ></div>
+      </div>
+
       <div
         class="text-sm font-medium text-gray-500 dark:text-gray-300 lg:hidden"
       >

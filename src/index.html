@@ -1,13 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>TodoTrekFrontend</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>TodoTrekFrontend</title>
+    <base href="/" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      function decodeJwtToken(token) {
+        return JSON.parse(atob(token.split(".")[1]));
+      }
+      function handleCredentialResponse(response) {
+        const payload = decodeJwtToken(response.credential);
+        sessionStorage.setItem("loggedInUser", JSON.stringify(payload));
+        window.location.href = "/login";
+      }
+
+      function handleSignUpResponse(response) {
+        const payload = decodeJwtToken(response.credential);
+        sessionStorage.setItem("loggedInUser", JSON.stringify(payload));
+        window.location.href = "/register";
+      }
+
+      function handleSignout() {
+        google.accounts.id.disableAutoSelect();
+      }
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

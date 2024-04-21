@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import {
   FormBuilder,
@@ -13,10 +13,11 @@ import { AuthService } from "../../core/auth.service";
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.css",
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: String = "";
   hasError: Boolean = false;
+  userProfile: any;
 
   constructor(
     private router: Router,
@@ -41,7 +42,7 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe(
         (res) => {
           localStorage.setItem("user-token", res.token);
-          this.router.navigate(["dashboard"]);
+          this.router.navigate(["dashboard/home"]);
         },
         (error) => {
           const unauthrisedStatusCode = [401, 404];
@@ -61,8 +62,34 @@ export class LoginComponent {
         }
       );
     } else {
-      this.hasError = true;
       this.errorMessage = "Email or Password must be provided";
+      this.hasError = true;
+    }
+  }
+
+  ngOnInit(): void {
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      this.userProfile = JSON.parse(loggedInUser);
+      if (this.userProfile) {
+        const googleUser = {
+          firstName: this.userProfile.given_name,
+          lastName: this.userProfile.family_name,
+          email: this.userProfile.email,
+          googleId: this.userProfile.sub,
+        };
+
+        this.authService.googleSignin(googleUser).subscribe(
+          (res) => {
+            localStorage.setItem("user-token", res.token);
+            this.router.navigate(["dashboard/home"]);
+          },
+          (error) => {
+            this.errorMessage = error.error.message;
+            this.hasError = true;
+          }
+        );
+      }
     }
   }
 }

@@ -4,5 +4,9 @@ export interface User {
     email?: String;
     password?: String;
     isVerified: String;
+    firstName: String;
+    lastName: String;
+    googleId: String;
+    accountType: String;
   };
 }

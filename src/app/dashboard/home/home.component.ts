@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
       _id: "",
       email: "",
       isVerified: "",
+      firstName: "",
+      lastName: "",
+      googleId: "",
+      accountType: "",
     },
   };
 

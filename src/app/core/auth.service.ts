@@ -9,6 +9,8 @@ import { throwError, catchError, Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { User } from "./interface/user";
 
+declare var handleSignout: any;
+
 @Injectable({
   providedIn: "root",
 })
@@ -23,13 +25,15 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  register(userObj: any) {
-    const body = {
-      email: userObj.email,
-      password: userObj.password,
-    };
+  googleSignin(googleUser: any) {
     return this.http
-      .post<any>(`${this.url}/auth/sign_up`, body)
+      .post<any>(`${this.url}/auth/register/google_account`, googleUser)
+      .pipe(catchError(this.handleError));
+  }
+
+  register(userObj: any) {
+    return this.http
+      .post<any>(`${this.url}/auth/sign_up`, userObj)
       .pipe(catchError(this.handleError));
   }
 
@@ -67,7 +71,11 @@ export class AuthService {
   doLogout() {
     let removeToken = localStorage.removeItem("user-token");
     if (removeToken == null) {
-      this.router.navigate([""]);
+      handleSignout();
+      sessionStorage.removeItem("loggedInUser");
+      this.router.navigate([""]).then(() => {
+        window.location.reload();
+      });
     }
   }
 

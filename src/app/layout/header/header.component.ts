@@ -9,11 +9,16 @@ import { User } from "../../core/interface/user";
   styleUrl: "./header.component.css",
 })
 export class HeaderComponent implements OnInit {
+  isDropDownOpen: Boolean = false;
   current: User = {
     user: {
       _id: "",
       email: "",
       isVerified: "",
+      firstName: "",
+      lastName: "",
+      googleId: "",
+      accountType: "",
     },
   };
 
@@ -38,5 +43,9 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.authService.doLogout();
+  }
+
+  openDropDown() {
+    this.isDropDownOpen = !this.isDropDownOpen;
   }
 }

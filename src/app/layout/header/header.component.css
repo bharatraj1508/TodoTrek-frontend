@@ -1,0 +1,15 @@
+/* Add transition for the dropdown */
+#dropdownDivider {
+  transition: max-height 0.3s ease-in-out; /* Adjust the timing and easing function as needed */
+}
+
+/* Define the styles for the hidden state */
+.hidden {
+  max-height: 0;
+  overflow: hidden;
+}
+
+/* Define the styles for the shown state */
+.show {
+  max-height: 500px; /* Adjust the maximum height as needed */
+}
