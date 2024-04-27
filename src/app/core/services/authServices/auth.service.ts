@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Environment } from "./environment";
+import { Environment } from "../../environment";
 import {
   HttpClient,
   HttpHeaders,
@@ -7,8 +7,9 @@ import {
 } from "@angular/common/http";
 import { throwError, catchError, Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { User } from "./interface/user";
+import { User } from "../../interface/user";
 
+// this is for singing out the google accounts
 declare var handleSignout: any;
 
 @Injectable({

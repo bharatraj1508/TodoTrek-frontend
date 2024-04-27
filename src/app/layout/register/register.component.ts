@@ -7,7 +7,7 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "../../core/auth.service";
+import { AuthService } from "../../core/services/authServices/auth.service";
 
 @Component({
   selector: "app-register",

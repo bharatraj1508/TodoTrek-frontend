@@ -1,0 +1,74 @@
+<div
+  class="max-w-lg mx-auto p-6 rounded-lg shadow-xl bg-form border border-gray-200"
+>
+  <div
+    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
+    role="alert"
+    *ngIf="this.hasError"
+    [innerHTML]="message"
+  ></div>
+  <div
+    class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
+    role="success"
+    *ngIf="this.success"
+    [innerHTML]="message"
+  ></div>
+  <form [formGroup]="projectForm" (ngSubmit)="submitProject()">
+    <h1 class="text-2xl font-bold mb-5">Create a Project</h1>
+    <div class="mb-5">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="project-name"
+      >
+        Project Name
+      </label>
+      <input
+        formControlName="name"
+        class="{{
+          projectForm.get('name')?.invalid && projectForm.get('name')?.touched
+            ? 'border-red-500'
+            : 'focus:border-blue-600'
+        }} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+        id="name"
+        type="text"
+        placeholder="Enter project name"
+      />
+      <div class="text-red-500 text-sm">
+        {{ getFormControlError("name") }}
+      </div>
+    </div>
+    <div class="mb-5">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="project-color"
+      >
+        Color
+      </label>
+      <select #selectElem formControlName="color" id="color" required></select>
+      <div class="text-red-500 text-sm">
+        {{ getFormControlError("color") }}
+      </div>
+    </div>
+    <div class="flex items-start mb-5">
+      <div class="flex items-center h-5">
+        <input
+          id="favourite"
+          formControlName="favourites"
+          type="checkbox"
+          class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+        />
+      </div>
+      <label
+        for="remember"
+        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Set Favourite</label
+      >
+    </div>
+    <button
+      type="submit"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      {{ edit ? "Update" : "Create" }}
+    </button>
+  </form>
+</div>

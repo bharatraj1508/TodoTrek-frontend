@@ -1,0 +1,64 @@
+<div class="flex flex-col items-center md:mx-72 justify-center">
+  <div class="space-y-8">
+    <div class="space-y-4">
+      <div>
+        <h2 class="text-5xl font-extrabold neucha-regular">
+          {{ project?.name }}
+        </h2>
+      </div>
+
+      <div *ngIf="projectTasks.length > 0">
+        <div *ngFor="let task of projectTasks">
+          <div class="my-2">
+            <div class="flex flex-row space-x-4">
+              <div class="flex items-center">
+                <input
+                  type="checkbox"
+                  [value]="task.task.body"
+                  name="taskSelection"
+                  id="{{ task.task._id }}"
+                />
+              </div>
+
+              <div class="flex items-start">
+                <label for="{{ task.task._id }}" class="text-lg">{{
+                  task.task.body
+                }}</label>
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+    <div>
+      <div *ngIf="projectCategory.length > 0">
+        <div *ngFor="let category of projectCategory">
+          <p class="text-lg font-bold mb-2">{{ category.category.name }}</p>
+          <div *ngFor="let task of category.category.tasks">
+            <div class="my-2">
+              <div class="flex flex-row space-x-4">
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    [value]="task.task.body"
+                    name="taskSelection"
+                    id="{{ task.task._id }}"
+                  />
+                </div>
+
+                <div class="flex items-start">
+                  <label for="{{ task.task._id }}" class="text-lg">{{
+                    task.task.body
+                  }}</label>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

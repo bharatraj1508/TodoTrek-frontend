@@ -1,3 +1,6 @@
+@import "./assets/tom-select.css";
+@import "./assets/select.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,67 +1,76 @@
 {
-  "hash": "86400e71",
-  "configHash": "0851d296",
-  "lockfileHash": "11a01457",
-  "browserHash": "c4e4c8bb",
+  "hash": "a49b6a02",
+  "configHash": "72f84790",
+  "lockfileHash": "ee1ac137",
+  "browserHash": "c811ac9d",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "3d50eee6",
+      "fileHash": "31b42396",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "b11145d5",
+      "fileHash": "2d5a9b41",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "dfeb236f",
+      "fileHash": "0f2d9bf1",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "d55865a6",
+      "fileHash": "f4dfd1b0",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "8861c3d6",
+      "fileHash": "973c9f5f",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "a0d8d253",
+      "fileHash": "2383760b",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "38bb4ea4",
+      "fileHash": "5c1090ae",
+      "needsInterop": false
+    },
+    "tom-select": {
+      "src": "../../../../../node_modules/tom-select/dist/esm/tom-select.complete.js",
+      "file": "tom-select.js",
+      "fileHash": "d820a42d",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-CC3NMCQN": {
-      "file": "chunk-CC3NMCQN.js"
+    "chunk-T4CCOI7X": {
+      "file": "chunk-T4CCOI7X.js"
     },
-    "chunk-KHEYWSLQ": {
-      "file": "chunk-KHEYWSLQ.js"
+    "chunk-WBLUDWRS": {
+      "file": "chunk-WBLUDWRS.js"
     },
-    "chunk-HFOQLTAW": {
-      "file": "chunk-HFOQLTAW.js"
+    "chunk-XIIDFHXR": {
+      "file": "chunk-XIIDFHXR.js"
     },
-    "chunk-4FFVUQGS": {
-      "file": "chunk-4FFVUQGS.js"
+    "chunk-KBDOKLKO": {
+      "file": "chunk-KBDOKLKO.js"
     },
-    "chunk-SXIXOCJ4": {
-      "file": "chunk-SXIXOCJ4.js"
+    "chunk-WSA2QMXP": {
+      "file": "chunk-WSA2QMXP.js"
+    },
+    "chunk-J4B6MK7R": {
+      "file": "chunk-J4B6MK7R.js"
     }
   }
 }

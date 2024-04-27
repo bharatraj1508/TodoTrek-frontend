@@ -1,0 +1,31 @@
+.ts-control {
+  @apply gap-2 rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500;
+}
+
+.ts-wrapper.plugin-remove_button .item {
+  @apply rounded-md;
+}
+.ts-wrapper.multi .ts-control > div {
+  @apply m-0 p-0 pl-1;
+}
+
+.ts-wrapper.plugin-remove_button .item .remove {
+  @apply rounded-r-lg border-none py-1 text-lg leading-none;
+}
+
+.ts-dropdown {
+  @apply rounded-md border border-t border-solid border-gray-300;
+}
+
+.ts-dropdown [data-selectable].option:first-child {
+  @apply rounded-t-md;
+}
+
+.ts-dropdown [data-selectable].option:last-child {
+  @apply rounded-b-md;
+}
+.ts-dropdown .create:hover,
+.ts-dropdown .option:hover,
+.ts-dropdown .active {
+  @apply bg-blue-100 text-blue-900;
+}
