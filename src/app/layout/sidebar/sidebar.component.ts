@@ -30,6 +30,9 @@ export class SidebarComponent implements OnInit {
     this.projectEventService.projectCreated$.subscribe((project) => {
       this.projects.push(project);
     });
+    this.projectEventService.projectDeleted$.subscribe((projectId) => {
+      this.projects = this.projects.filter((pr) => pr._id !== projectId);
+    });
     this.projectEventService.projectUpdated$.subscribe((project) => {
       this.projects = this.projects.map((pr) =>
         pr._id === project._id ? project : pr

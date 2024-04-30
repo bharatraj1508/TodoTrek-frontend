@@ -57,7 +57,7 @@ export class NewComponent implements AfterViewInit {
           this.edit = true;
         },
         (err) => {
-          console.log(err);
+          this.router.navigate(["/dashboard/home"]);
         }
       );
     }

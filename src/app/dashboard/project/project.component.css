@@ -5,3 +5,23 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.svg-hover:hover svg {
+  background-color: #f43f5e;
+  color: white;
+  border-radius: 9999px;
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.text-hover:hover p {
+  color: #f43f5e;
+}
+
+.hover-buttons-project:hover #dropdownProject {
+  display: block;
+}
+
+.hover-buttons-category-task:hover #dropdownCategoryTask {
+  display: block;
+}

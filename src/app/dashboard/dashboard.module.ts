@@ -8,6 +8,7 @@ import { LayoutModule } from "../layout/layout.module";
 import { ProjectComponent } from "./project/project.component";
 import { NewComponent } from "./project/new/new.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NewTaskComponent } from './task/new-task/new-task.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     HomeComponent,
     ProjectComponent,
     NewComponent,
+    NewTaskComponent,
   ],
   imports: [
     CommonModule,
