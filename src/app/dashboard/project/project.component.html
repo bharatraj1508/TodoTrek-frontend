@@ -46,6 +46,7 @@
                 </li>
                 <li>
                   <button
+                    (click)="newCategory()"
                     class="block px-4 py-2 hover:bg-gray-100 w-full text-left"
                   >
                     Add new category
@@ -113,22 +114,40 @@
                 <div class="flex items-center">
                   <input
                     type="checkbox"
-                    [value]="task.task.body"
                     name="taskSelection"
-                    id="{{ task.task._id }}"
+                    id="{{ task._id }}"
+                    [checked]="task.isCompleted"
+                    (change)="
+                      markCompleted(task._id, $any($event.target).checked)
+                    "
                   />
                 </div>
 
                 <div class="flex items-start flex-grow">
-                  <label for="{{ task.task._id }}" class="text-lg">{{
-                    task.task.body
-                  }}</label>
+                  <label for="{{ task._id }}" class="text-lg">
+                    <div class="flex flex-row">
+                      <p class="{{ task.isCompleted ? 'line-through' : '' }}">
+                        {{ task.body }}
+                      </p>
+                      <div class="flex flex-row ml-3" *ngIf="task.priority">
+                        <p
+                          class="{{ setPriorityColor(task.priority) }}"
+                          *ngFor="let i of [].constructor(task.priority)"
+                        >
+                          !
+                        </p>
+                      </div>
+                    </div>
+                  </label>
                 </div>
               </div>
 
               <div class="hidden" id="dropdownProject">
                 <div class="flex flex-row space-x-2">
-                  <button (click)="newTaskForm(task.task._id, 'task')">
+                  <button
+                    *ngIf="!task.isCompleted"
+                    (click)="newTaskForm(task._id, 'task')"
+                  >
                     <svg
                       class="w-4 h-4 text-gray-800"
                       aria-hidden="true"
@@ -145,7 +164,7 @@
                       />
                     </svg>
                   </button>
-                  <button (click)="deleteConfirmation(task.task._id, 'task')">
+                  <button (click)="deleteConfirmation(task._id, 'task')">
                     <svg
                       class="w-4 h-4 text-red-500"
                       aria-hidden="true"
@@ -246,13 +265,14 @@
         <div *ngFor="let category of projectCategory; let i = index">
           <div class="flex flex-row items-center mb-2 space-x-2">
             <p [attr.id]="'categoryName' + i" class="text-lg font-bold">
-              {{ category.category.name }}
+              {{ category.name }}
             </p>
             <div [attr.id]="'categoryNameInput' + i" class="hidden">
-              <div class="flex flex-row items-center space-x-3">
+              <div>
                 <form
+                  class="flex flex-row items-center space-x-3"
                   [formGroup]="categoryForm"
-                  (ngSubmit)="updateCatName(category.category._id, i)"
+                  (ngSubmit)="updateCatName(category._id, i)"
                 >
                   <input
                     type="text"
@@ -262,7 +282,7 @@
                   />
                   <button type="submit">
                     <svg
-                      class="w-4 h-4 text-green-500"
+                      class="w-5 h-5 text-green-500"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -282,7 +302,7 @@
 
                   <button (click)="cancelEditCategory(i)" type="button">
                     <svg
-                      class="w-4 h-4 text-red-500"
+                      class="w-5 h-5 text-red-500"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -330,7 +350,7 @@
                 <ul class="block text-left">
                   <li>
                     <button
-                      (click)="editCategoryName(i, category.category.name)"
+                      (click)="editCategoryName(i, category.name)"
                       class="block px-4 py-2 hover:bg-gray-100 w-full text-left"
                     >
                       Edit
@@ -338,9 +358,7 @@
                   </li>
                   <li>
                     <button
-                      (click)="
-                        deleteConfirmation(category.category._id, 'category', i)
-                      "
+                      (click)="deleteConfirmation(category._id, 'category', i)"
                       class="px-4 py-2 hover:bg-gray-100 w-full text-left flex items-center"
                     >
                       <svg
@@ -368,7 +386,7 @@
             </div>
           </div>
 
-          <div *ngIf="category.category.tasks!.length === 0">
+          <div *ngIf="category.tasks!.length === 0">
             <!-- template for no tasks yet -->
 
             <div class="my-2 hover-buttons-project">
@@ -380,7 +398,7 @@
 
                   <div class="flex items-start flex-grow">
                     <label class="text-md italic text-gray-500">
-                      Create your first Task for {{ category.category.name }}
+                      Create your first Task for {{ category.name }}
                     </label>
                   </div>
                 </div>
@@ -390,29 +408,44 @@
             <!-- template ends here -->
           </div>
 
-          <div *ngFor="let task of category.category.tasks">
+          <div *ngFor="let task of category.tasks">
             <div class="my-2 hover-buttons-category-task">
-              <div class="flex flex-row space-x-4">
+              <div class="flex flex-row items-center justify-between space-x-4">
                 <div class="flex flex-row space-x-4 w-full">
                   <div class="flex items-center">
                     <input
                       type="checkbox"
-                      [value]="task.task.body"
                       name="taskSelection"
-                      id="{{ task.task._id }}"
+                      id="{{ task._id }}"
+                      [checked]="task.isCompleted"
+                      (change)="
+                        markCompleted(task._id, $any($event.target).checked)
+                      "
                     />
                   </div>
 
                   <div class="flex items-start">
-                    <label for="{{ task.task._id }}" class="text-lg">{{
-                      task.task.body
-                    }}</label>
+                    <label for="{{ task._id }}" class="text-lg">
+                      <div class="flex flex-row">
+                        <p class="{{ task.isCompleted ? 'line-through' : '' }}">
+                          {{ task.body }}
+                        </p>
+                        <div class="flex flex-row ml-3" *ngIf="task.priority">
+                          <p
+                            class="{{ setPriorityColor(task.priority) }}"
+                            *ngFor="let i of [].constructor(task.priority)"
+                          >
+                            !
+                          </p>
+                        </div>
+                      </div>
+                    </label>
                   </div>
                 </div>
 
                 <div class="hidden" id="dropdownCategoryTask">
                   <div class="flex flex-row space-x-2">
-                    <button (click)="newTaskForm(task.task._id, 'task')">
+                    <button (click)="newTaskForm(task._id, 'task')">
                       <svg
                         class="w-4 h-4 text-gray-800"
                         aria-hidden="true"
@@ -429,7 +462,7 @@
                         />
                       </svg>
                     </button>
-                    <button (click)="deleteConfirmation(task.task._id, 'task')">
+                    <button (click)="deleteConfirmation(task._id, 'task')">
                       <svg
                         class="w-4 h-4 text-red-500"
                         aria-hidden="true"
@@ -455,7 +488,7 @@
             <hr />
           </div>
           <button
-            (click)="newTaskForm(category.category._id, 'category')"
+            (click)="newTaskForm(category._id, 'category')"
             class="flex items-center justify-center space-x-3 svg-hover text-hover mt-2"
           >
             <svg

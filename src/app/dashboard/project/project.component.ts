@@ -76,15 +76,47 @@ export class ProjectComponent implements OnInit {
         this.cid = null;
       }
     });
+    this.taskEventService.taskUpdated$.subscribe((val) => {
+      if (val) {
+        this.loadProject();
+        this.taskId = null;
+        this.pid = null;
+        this.cid = null;
+      }
+    });
   }
 
   loadProject() {
     if (this.projectId) {
-      this.projectService.getSingleProject(this.projectId).subscribe((res) => {
-        this.project = res;
-        this.projectTasks = res.tasks || [];
-        this.projectCategory = res.categories || [];
-      });
+      this.projectService.getSingleProject(this.projectId).subscribe(
+        (res) => {
+          this.project = res;
+          this.projectTasks = res.tasks || [];
+          this.projectCategory = res.categories || [];
+        },
+        (err) => {
+          this.router.navigate(["/dashboard/home"]);
+        }
+      );
+    }
+  }
+
+  markCompleted(id: ObjectId, checked: boolean) {
+    this.taskService.changeTaskComplettion(id, checked).subscribe((res) => {
+      this.loadProject();
+    });
+  }
+
+  setPriorityColor(priority: number) {
+    switch (priority) {
+      case 1:
+        return "text-green-500";
+      case 2:
+        return "text-yellow-500";
+      case 3:
+        return "text-red-500";
+      default:
+        return "text-gray-500";
     }
   }
 
@@ -92,10 +124,16 @@ export class ProjectComponent implements OnInit {
     const category: Object = {
       name: "new category",
     };
+
+    this.toggleDropdown = false;
+
     this.categoryService
       .createCategory(category, this.project!._id)
       .subscribe((res) => {
         this.loadProject();
+        setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight);
+        }, 300);
       });
   }
 
@@ -130,16 +168,6 @@ export class ProjectComponent implements OnInit {
     };
     this.categoryService.updateCategory(cat, id).subscribe((res) => {
       this.cancelEditCategory(index);
-      this.loadProject();
-    });
-  }
-
-  deleteCategory(id: ObjectId, index: number) {
-    this.categoryService.deleteCategory(id).subscribe((res) => {
-      document
-        .getElementById(`categoryDropdown${index}`)
-        ?.classList.add("hidden");
-      this.showDeleteConfirmation = false;
       this.loadProject();
     });
   }
@@ -182,6 +210,24 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  deleteCategory(id: ObjectId, index: number) {
+    this.categoryService.deleteCategory(id).subscribe((res) => {
+      document
+        .getElementById(`categoryDropdown${index}`)
+        ?.classList.add("hidden");
+      this.showDeleteConfirmation = false;
+      this.loadProject();
+    });
+  }
+
+  deleteTask(id: ObjectId) {
+    this.taskService.deleteTask(id).subscribe((res) => {
+      this.taskId = null;
+      this.loadProject();
+      this.showDeleteConfirmation = false;
+    });
+  }
+
   deleteConfirmation(
     id: ObjectId,
     deletedSource: "project" | "category" | "task",
@@ -208,14 +254,6 @@ export class ProjectComponent implements OnInit {
         this.deleteProject();
         break;
     }
-  }
-
-  deleteTask(id: ObjectId) {
-    this.taskService.deleteTask(id).subscribe((res) => {
-      this.taskId = null;
-      this.loadProject();
-      this.showDeleteConfirmation = false;
-    });
   }
 
   cancelDelete() {

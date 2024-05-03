@@ -30,11 +30,31 @@ export class TaskService {
     });
   }
 
+  updateTask(id: ObjectId, task: Task): Observable<Task> {
+    let api = `${this.url}/task/${id}`;
+
+    return this.http.patch<Task>(api, task, {
+      headers: this.headers,
+    });
+  }
+
   getSingleTask(id: ObjectId): Observable<any> {
     let api = `${this.url}/task/${id}`;
 
     return this.http.get<any>(api, {
       headers: this.headers,
     });
+  }
+
+  changeTaskComplettion(id: ObjectId, isCompleted: boolean): Observable<Task> {
+    let api = `${this.url}/task/change-completion/${id}`;
+
+    return this.http.patch<Task>(
+      api,
+      { isCompleted },
+      {
+        headers: this.headers,
+      }
+    );
   }
 }
