@@ -55,6 +55,18 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  changePassword(passwordObj: any) {
+    return this.http
+      .patch<any>(`${this.url}/auth/user/change-password`, passwordObj)
+      .pipe(catchError(this.handleError));
+  }
+
+  changeEmail(emailObj: any) {
+    return this.http
+      .patch<any>(`${this.url}/auth/user/change-email`, emailObj)
+      .pipe(catchError(this.handleError));
+  }
+
   verifyEmail(token: String) {
     return this.http
       .post<any>(`${this.url}/auth/email/verify?token=${token}`, {
@@ -69,13 +81,13 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  doLogout() {
+  doLogout(loginMessage?: string) {
     let removeToken = localStorage.removeItem("user-token");
     if (removeToken == null) {
       handleSignout();
       sessionStorage.removeItem("loggedInUser");
-      this.router.navigate([""]).then(() => {
-        window.location.reload();
+      this.router.navigate(["/login"], {
+        state: { message: loginMessage },
       });
     }
   }

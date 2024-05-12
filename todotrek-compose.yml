@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  todotrek-backend:
+    image: bharat1508/todotrek-backend
+    ports:
+      - "3000:3000"
+  todotrek-frontend:
+    image: bharat1508/todotrek-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - todotrek-backend

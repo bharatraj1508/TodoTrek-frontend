@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import {
   FormBuilder,
@@ -14,6 +14,7 @@ import { AuthService } from "../../core/services/authServices/auth.service";
   styleUrl: "./login.component.css",
 })
 export class LoginComponent implements OnInit {
+  loginMessage: string = "";
   loginForm: FormGroup;
   errorMessage: String = "";
   hasError: Boolean = false;
@@ -35,6 +36,11 @@ export class LoginComponent implements OnInit {
         this.errorMessage = "";
       }
     });
+
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state) {
+      this.loginMessage = navigation.extras.state["message"];
+    }
   }
 
   login() {
@@ -45,6 +51,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["dashboard/home"]);
         },
         (error) => {
+          this.loginMessage = "";
           const unauthrisedStatusCode = [401, 404];
           if (unauthrisedStatusCode.includes(error.status)) {
             if (error.error.message == "User email is not verified")
@@ -62,6 +69,7 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
+      this.loginMessage = "";
       this.errorMessage = "Email or Password must be provided";
       this.hasError = true;
     }

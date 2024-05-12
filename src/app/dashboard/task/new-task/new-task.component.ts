@@ -115,6 +115,8 @@ export class NewTaskComponent implements AfterViewInit {
         options: [],
         placeholder: "Select a project",
         plugins: ["remove_button"],
+        create: false,
+        closeAfterSelect: true,
       }
     );
 
@@ -124,7 +126,8 @@ export class NewTaskComponent implements AfterViewInit {
         options: [],
         placeholder: "Select a category",
         plugins: ["remove_button"],
-        maxItems: 1,
+        create: false,
+        closeAfterSelect: true,
       }
     );
 
@@ -139,6 +142,8 @@ export class NewTaskComponent implements AfterViewInit {
         ],
         items: ["0"],
         plugins: ["remove_button"],
+        create: false,
+        closeAfterSelect: true,
         sortField: [
           {
             field: "text",

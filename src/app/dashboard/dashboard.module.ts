@@ -8,7 +8,9 @@ import { LayoutModule } from "../layout/layout.module";
 import { ProjectComponent } from "./project/project.component";
 import { NewComponent } from "./project/new/new.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { NewTaskComponent } from './task/new-task/new-task.component';
+import { NewTaskComponent } from "./task/new-task/new-task.component";
+import { ChangePasswordComponent } from './profile/change-password/change-password.component';
+import { ChangeEmailComponent } from './profile/change-email/change-email.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { NewTaskComponent } from './task/new-task/new-task.component';
     ProjectComponent,
     NewComponent,
     NewTaskComponent,
+    ChangePasswordComponent,
+    ChangeEmailComponent,
   ],
   imports: [
     CommonModule,

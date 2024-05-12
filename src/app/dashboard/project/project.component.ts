@@ -88,16 +88,18 @@ export class ProjectComponent implements OnInit {
 
   loadProject() {
     if (this.projectId) {
-      this.projectService.getSingleProject(this.projectId).subscribe(
-        (res) => {
-          this.project = res;
-          this.projectTasks = res.tasks || [];
-          this.projectCategory = res.categories || [];
-        },
-        (err) => {
-          this.router.navigate(["/dashboard/home"]);
-        }
-      );
+      this.projectService
+        .getSingleProject(this.projectId, "INCOMPLETE_FIRST")
+        .subscribe(
+          (res) => {
+            this.project = res;
+            this.projectTasks = res.tasks || [];
+            this.projectCategory = res.categories || [];
+          },
+          (err) => {
+            this.router.navigate(["/dashboard/home"]);
+          }
+        );
     }
   }
 

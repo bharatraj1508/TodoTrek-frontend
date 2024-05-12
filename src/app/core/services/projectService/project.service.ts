@@ -19,13 +19,13 @@ export class ProjectService {
   headers = new HttpHeaders().set("Content-Type", "application/json");
   constructor(private http: HttpClient, private router: Router) {}
 
-  getUserProjects(): Observable<Project[]> {
-    let api = `${this.url}/project/user`;
+  getUserProjects(sort?: string): Observable<Project[]> {
+    let api = `${this.url}/project/user?${sort ? `sort=${sort}` : ""}`;
     return this.http.get<Project[]>(api);
   }
 
-  getSingleProject(id: ObjectId): Observable<Project> {
-    let api = `${this.url}/project/${id}`;
+  getSingleProject(id: ObjectId, sort?: string): Observable<Project> {
+    let api = `${this.url}/project/${id}?${sort ? `sort=${sort}` : ""}`;
     return this.http.get<Project>(api);
   }
 

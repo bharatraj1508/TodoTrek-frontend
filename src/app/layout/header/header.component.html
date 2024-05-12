@@ -41,15 +41,23 @@
             aria-labelledby="dropdownDividerButton"
           >
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                >Dashboard</a
+              <a class="block px-4 py-2 hover:bg-gray-100">View Profile</a>
+            </li>
+            <li>
+              <a
+                (click)="this.isDropDownOpen = !this.isDropDownOpen"
+                [routerLink]="['/dashboard/profile/change-password']"
+                class="block px-4 py-2 hover:bg-gray-100"
+                >Change Password</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Earnings</a>
+              <a
+                (click)="this.isDropDownOpen = !this.isDropDownOpen"
+                [routerLink]="['/dashboard/profile/change-email']"
+                class="block px-4 py-2 hover:bg-gray-100"
+                >Change Email</a
+              >
             </li>
           </ul>
           <div class="py-2">

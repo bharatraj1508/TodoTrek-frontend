@@ -4,6 +4,8 @@ import { HomeComponent } from "./home/home.component";
 import { DashboardComponent } from "./dashboard.component";
 import { ProjectComponent } from "./project/project.component";
 import { NewComponent } from "./project/new/new.component";
+import { ChangePasswordComponent } from "./profile/change-password/change-password.component";
+import { ChangeEmailComponent } from "./profile/change-email/change-email.component";
 
 const routes: Routes = [
   {
@@ -14,6 +16,8 @@ const routes: Routes = [
       { path: "project/:pid", component: ProjectComponent },
       { path: "new/project", component: NewComponent },
       { path: "edit/project/:pid", component: NewComponent },
+      { path: "profile/change-password", component: ChangePasswordComponent },
+      { path: "profile/change-email", component: ChangeEmailComponent },
     ],
   },
 ];

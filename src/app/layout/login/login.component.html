@@ -42,6 +42,13 @@
       {{ errorMessage }}
     </div>
 
+    <div
+      *ngIf="loginMessage"
+      class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-100"
+    >
+      <p>{{ loginMessage }}</p>
+    </div>
+
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-8">
       <div class="flex justify-center">
         <h2 class="text-3xl font-extrabold uppercase">Login</h2>
